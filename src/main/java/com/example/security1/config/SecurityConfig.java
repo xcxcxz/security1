@@ -8,11 +8,17 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfiguration;
 import org.springframework.security.config.http.SessionCreationPolicy;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 
 @Configuration
 @EnableWebSecurity //스프링 시큐리티 필터가 스프링 필터체인에 등록됨.
 public class SecurityConfig {
+
+    @Bean
+    public BCryptPasswordEncoder encodePwd(){
+        return new BCryptPasswordEncoder();
+    }
 
     @Bean
     SecurityFilterChain filterChain(HttpSecurity http) throws Exception{
@@ -25,11 +31,13 @@ public class SecurityConfig {
                 .authorizeHttpRequests()
                 .requestMatchers("/user/**").authenticated()
                 .requestMatchers("/manager/**").hasAnyRole("ROLE_ADMIN", "ROLE_MANAGER")
-                .requestMatchers("/managet/**").hasRole("ROLE_ADMIN")
+                .requestMatchers("/admin/**").hasRole("ROLE_ADMIN")
                 .anyRequest().permitAll()
                 .and()
                 .formLogin()
-                .loginPage("/login")
+                .loginPage("/loginForm")
+                .loginProcessingUrl("/login")
+                .defaultSuccessUrl("/")
                 .and().build();
 
 
