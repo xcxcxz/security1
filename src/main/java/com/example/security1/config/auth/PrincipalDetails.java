@@ -2,6 +2,7 @@ package com.example.security1.config.auth;
 
 
 import com.example.security1.model.User;
+import lombok.Data;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
@@ -12,6 +13,7 @@ import java.util.Collection;
 // 세션안에 담시는 오브젝트 = Authentication 타입 객체
 // Authentication 안에 User 정보가 있어야됨
 // User오브젝트 타입 = UserDetail 타입 객체
+@Data
 public class PrincipalDetails implements UserDetails {
 
     private User user;
@@ -24,12 +26,7 @@ public class PrincipalDetails implements UserDetails {
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         Collection<GrantedAuthority> collect = new ArrayList<>();
-        collect.add(new GrantedAuthority() {
-            @Override
-            public String getAuthority() {
-                return user.getRole();
-            }
-        });
+        collect.add(() -> user.getRole());
         return collect;
     }
 

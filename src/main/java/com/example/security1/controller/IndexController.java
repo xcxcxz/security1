@@ -4,6 +4,7 @@ package com.example.security1.controller;
 import com.example.security1.model.User;
 import com.example.security1.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -39,9 +40,9 @@ public class IndexController {
         return "manager";
     }
 
-    @GetMapping("/loginForm")
-    public String loginForm(){
-        return "loginForm";
+    @GetMapping("/login")
+    public String login() {
+        return "login";
     }
 
     @GetMapping("/joinForm")

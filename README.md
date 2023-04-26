@@ -9,4 +9,5 @@
 
 ## Day-2
 - application.properties에서 viewResolver 관련 세팅이 가능하여 WebMVCConfig는 삭제처리
-- 
+- userdetails 클래스를 이용한 로그인 처리
+- 세션 로그인시 session을 유지하기 위해 stateless 설정을 비활성화 시켜야 한다.
