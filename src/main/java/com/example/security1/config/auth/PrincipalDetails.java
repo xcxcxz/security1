@@ -5,16 +5,27 @@ import com.example.security1.model.User;
 import lombok.Data;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.oauth2.core.user.OAuth2User;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Map;
 
 // 로그인 진행이 완료되면 시큐리티 세션을 만들어준다.
 // 세션안에 담시는 오브젝트 = Authentication 타입 객체
 // Authentication 안에 User 정보가 있어야됨
 // User오브젝트 타입 = UserDetail 타입 객체
 @Data
-public class PrincipalDetails implements UserDetails {
+public class PrincipalDetails implements UserDetails, OAuth2User {
+    @Override
+    public Map<String, Object> getAttributes() {
+        return null;
+    }
+
+    @Override
+    public String getName() {
+        return null;
+    }
 
     private User user;
 
